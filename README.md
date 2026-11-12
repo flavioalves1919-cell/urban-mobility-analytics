@@ -90,7 +90,7 @@ Período: janeiro a junho de 2025.
 
 Receita reconhecida total: 508.044.416,17.
 
-Os testes dbt executados anteriormente apresentaram 8 aprovações, sem erros ou avisos.
+A execução atual do dbt apresentou 14 operações concluídas com sucesso, incluindo 8 testes de qualidade, sem erros ou avisos.
 
 ## Estrutura do projeto
 
@@ -123,4 +123,4 @@ Os arquivos Parquet não são incluídos no repositório Git.
 
 ## Observação sobre validação
 
-As etapas de processamento e carga foram executadas e verificadas individualmente. Os testes dbt também foram executados com sucesso. Isso não representa uma execução final completa da DAG de ponta a ponta após todas as alterações de documentação e modelagem.
+Os seis meses de dados (janeiro a junho de 2025) foram processados na camada Silver. A carga no PostgreSQL foi concluída e validada, totalizando 23.886.128 registros. A execução do dbt foi concluída com 14 operações aprovadas, 8 testes de qualidade e nenhum erro ou aviso. A DAG do Airflow foi reconhecida e validada sem erros de importação. A execução completa da DAG de ponta a ponta ainda não foi realizada nesta validação final.
