@@ -53,6 +53,23 @@ Registros sem rejeições, mas com anomalias, recebem status `REVIEW`, incluindo
 
 Os demais registros recebem status `APPROVED`.
 
+## Campos derivados da Silver
+
+A camada Silver disponibiliza os seguintes campos derivados:
+
+- `pickup_date`: data da corrida.
+- `pickup_year_month`: ano e mês de referência da corrida.
+- `trip_duration_minutes`: duração da viagem em minutos.
+- `is_valid_trip`: indicador de validade da viagem.
+- `invalid_reason`: motivo de rejeição da viagem, quando aplicável.
+
+### Regras adicionais de qualidade
+
+As seguintes anomalias são sinalizadas para revisão (`REVIEW`):
+
+- Duração da viagem superior a 6 horas.
+- Distância percorrida superior a 100 milhas.
+
 ## Regra de receita
 
 Somente os tipos de pagamento 1 (Credit card) e 2 (Cash) são elegíveis para receita.
