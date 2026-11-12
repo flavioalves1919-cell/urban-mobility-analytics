@@ -39,8 +39,6 @@ A solução utilizará a arquitetura Medalhão:
 
 ## 5. Regras de negócio
 
-- Viagens com duração superior a 6 horas serão sinalizadas como possíveis anomalias.
-- Viagens com distância superior a 100 milhas serão sinalizadas como possíveis anomalias.
 - A competência mensal será derivada da data de embarque.
 - Somente pagamentos válidos serão considerados para cálculo de receita.
 - Registros inválidos deverão possuir justificativa.
