@@ -96,6 +96,17 @@ def add_quality_classification(
     source_file: str,
 ) -> DataFrame:
 
+    df = df.withColumn(
+        "trip_duration_minutes",
+        F.round(
+            (
+                F.unix_timestamp("tpep_dropoff_datetime")
+                - F.unix_timestamp("tpep_pickup_datetime")
+            ) / 60.0,
+            2,
+        ),
+    )
+
     pickup_month = F.date_format(
         F.col("tpep_pickup_datetime"),
         "yyyy-MM",
@@ -122,6 +133,14 @@ def add_quality_classification(
     ]
 
     anomaly_conditions = [
+        (
+            F.col("trip_duration_minutes") > 360,
+            "TRIP_DURATION_ABOVE_6_HOURS",
+        ),
+        (
+            F.col("trip_distance") > 100,
+            "TRIP_DISTANCE_ABOVE_100_MILES",
+        ),
         (
             F.col("trip_distance") <= 0,
             "NON_POSITIVE_TRIP_DISTANCE",
@@ -158,8 +177,24 @@ def add_quality_classification(
     df = (
         df
         .withColumn(
+            "pickup_date",
+            F.to_date("tpep_pickup_datetime"),
+        )
+        .withColumn(
+            "pickup_year_month",
+            F.date_format("tpep_pickup_datetime", "yyyyMM"),
+        )
+        .withColumn(
             "rejection_reasons",
             F.concat_ws("|", *rejection_flags),
+        )
+        .withColumn(
+            "invalid_reason",
+            F.col("rejection_reasons"),
+        )
+        .withColumn(
+            "is_valid_trip",
+            F.col("rejection_reasons") == "",
         )
         .withColumn(
             "quality_flags",

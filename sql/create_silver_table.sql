@@ -24,5 +24,10 @@ CREATE TABLE IF NOT EXISTS silver.yellow_taxi_trips (
     reference_month VARCHAR(7) NOT NULL,
     source_file TEXT NOT NULL,
     is_valid_revenue_payment BOOLEAN NOT NULL,
-    quality_status VARCHAR(20) NOT NULL
+    quality_status VARCHAR(20) NOT NULL,
+    pickup_date DATE,
+    pickup_year_month VARCHAR(6),
+    trip_duration_minutes NUMERIC(12,2),
+    is_valid_trip BOOLEAN NOT NULL,
+    invalid_reason TEXT NOT NULL
 );

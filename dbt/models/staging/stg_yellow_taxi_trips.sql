@@ -24,6 +24,11 @@ SELECT
     reference_month,
     source_file,
     is_valid_revenue_payment,
-    quality_status
+    quality_status,
+    pickup_date,
+    pickup_year_month,
+    trip_duration_minutes,
+    is_valid_trip,
+    invalid_reason
 
 FROM {{ source('urban_mobility', 'yellow_taxi_trips') }}

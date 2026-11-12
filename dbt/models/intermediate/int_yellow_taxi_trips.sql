@@ -2,6 +2,11 @@ SELECT
     vendor_id,
     tpep_pickup_datetime,
     tpep_dropoff_datetime,
+    pickup_date,
+    pickup_year_month,
+    trip_duration_minutes,
+    is_valid_trip,
+    invalid_reason,
     passenger_count,
     trip_distance,
     pickup_location_id,
@@ -24,12 +29,6 @@ SELECT
         WHEN is_valid_revenue_payment
             THEN 1
         ELSE 0
-    END AS revenue_eligible_trip,
-
-    EXTRACT(
-        EPOCH FROM (
-            tpep_dropoff_datetime - tpep_pickup_datetime
-        )
-    ) / 60 AS trip_duration_minutes
+    END AS revenue_eligible_trip
 
 FROM {{ ref('stg_yellow_taxi_trips') }}

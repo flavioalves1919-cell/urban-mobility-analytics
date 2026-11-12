@@ -21,7 +21,8 @@ COLUMNS = [
     "total_amount", "congestion_surcharge", "Airport_fee",
     "cbd_congestion_fee", "rejection_reasons", "quality_flags",
     "reference_month", "source_file", "is_valid_revenue_payment",
-    "quality_status",
+    "quality_status", "pickup_date", "pickup_year_month",
+    "trip_duration_minutes", "is_valid_trip", "invalid_reason",
 ]
 
 COPY_SQL = """
@@ -33,7 +34,9 @@ COPY silver.yellow_taxi_trips (
     tolls_amount, improvement_surcharge, total_amount,
     congestion_surcharge, "Airport_fee", cbd_congestion_fee,
     rejection_reasons, quality_flags, reference_month,
-    source_file, is_valid_revenue_payment, quality_status
+    source_file, is_valid_revenue_payment, quality_status,
+    pickup_date, pickup_year_month, trip_duration_minutes,
+    is_valid_trip, invalid_reason
 ) FROM STDIN
 """
 
