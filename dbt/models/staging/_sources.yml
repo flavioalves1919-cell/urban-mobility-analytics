@@ -1,0 +1,9 @@
+version: 2
+
+sources:
+  - name: urban_mobility
+    description: "Dados tratados pelo PySpark na camada Silver."
+    schema: silver
+    tables:
+      - name: yellow_taxi_trips
+        description: "Viagens de táxi de janeiro a junho de 2025."

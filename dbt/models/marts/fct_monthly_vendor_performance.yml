@@ -1,0 +1,33 @@
+version: 2
+
+models:
+  - name: fct_monthly_vendor_performance
+    description: >
+      Indicadores mensais de desempenho por fornecedor,
+      construídos a partir dos dados de viagens tratados.
+
+    columns:
+      - name: reference_month
+        description: Mês de referência.
+        data_tests:
+          - not_null
+
+      - name: vendor_id
+        description: Identificador do fornecedor.
+        data_tests:
+          - not_null
+
+      - name: total_trips
+        description: Quantidade total de viagens.
+        data_tests:
+          - not_null
+
+      - name: total_revenue
+        description: Receita de pagamentos elegíveis.
+        data_tests:
+          - not_null
+
+      - name: revenue_eligible_trips
+        description: Quantidade de viagens elegíveis para receita.
+        data_tests:
+          - not_null

@@ -1,0 +1,36 @@
+services:
+  airflow:
+    image: apache/airflow:3.4.0-python3.12
+    container_name: urban_mobility_airflow
+    user: "1000:0"
+    group_add:
+      - "1001"
+    restart: unless-stopped
+    env_file:
+      - .env
+
+    environment:
+      AIRFLOW__CORE__EXECUTOR: SequentialExecutor
+      AIRFLOW__CORE__LOAD_EXAMPLES: "false"
+      AIRFLOW__CORE__DAGS_FOLDER: /opt/airflow/dags
+      PYTHONPATH: /opt/airflow
+      AIRFLOW__CORE__SIMPLE_AUTH_MANAGER_PASSWORDS_FILE: /opt/airflow/config/simple_auth_manager_passwords.json
+      AIRFLOW__API__AUTH_BACKENDS: airflow.api.auth.backend.basic_auth
+
+    command: standalone
+
+    ports:
+      - "8080:8080"
+
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - ./logs:/opt/airflow/logs
+      - ./config:/opt/airflow/config
+      - ./src:/opt/airflow/src:ro
+      - ./data:/opt/airflow/data
+      - ./dbt:/opt/airflow/dbt:ro
+      - /home/flavio/.dbt:/home/airflow/.dbt:ro
+      - /var/run/docker.sock:/var/run/docker.sock
+
+    mem_limit: 2g
+    cpus: 2.0
