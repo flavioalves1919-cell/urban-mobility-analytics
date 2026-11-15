@@ -141,3 +141,20 @@ Os arquivos Parquet não são incluídos no repositório Git.
 ## Observação sobre validação
 
 Os seis meses de dados (janeiro a junho de 2025) foram processados na camada Silver. A carga no PostgreSQL foi concluída e validada, totalizando 23.886.128 registros. A execução do dbt foi concluída com 14 operações aprovadas, 8 testes de qualidade e nenhum erro ou aviso. A DAG do Airflow foi reconhecida e validada sem erros de importação. A execução completa da DAG de ponta a ponta ainda não foi realizada nesta validação final.
+
+## Limitações técnicas e considerações sobre a implementação
+
+O Urban Mobility Analytics foi desenvolvido em ambiente local, utilizando Docker, WSL 2, Python, PySpark, PostgreSQL, dbt e Apache Airflow.
+
+A solução implementa uma arquitetura de dados baseada no modelo Medalhão (Bronze, Silver e Gold), contemplando ingestão, processamento, transformação, tratamento e validação de dados.
+
+Durante o desenvolvimento, foram processados mais de 24 milhões de registros, com aplicação de regras de qualidade e testes automatizados utilizando dbt.
+
+**Considerações técnicas sobre o ambiente de execução:**
+
+- **Recursos computacionais:** as limitações de memória RAM do ambiente local impactaram a execução simultânea dos serviços e algumas etapas de integração.
+- **Orquestração:** a DAG do Apache Airflow foi reconhecida e validada sem erros de importação. Entretanto, a execução integral do pipeline de ponta a ponta não foi concluída.
+- **Infraestrutura:** a implementação foi realizada localmente, sem implantação em infraestrutura Cloud ou cluster distribuído de produção.
+- **Operacionalização:** as etapas de processamento, carga e modelagem foram validadas, mas não houve validação completa da execução integrada por meio do Airflow.
+
+As limitações descritas refletem as condições técnicas do ambiente utilizado durante o desenvolvimento e delimitam o escopo efetivamente validado da solução.
